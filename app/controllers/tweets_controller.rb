@@ -14,6 +14,13 @@ class TweetsController < ApplicationController
             render partial: 'tweet', locals: {tweet: @tweet}
           end
         end
+
+        format.json do
+          if @tweet.save
+            render :json => @tweet
+          end
+        end
+
       end
     else
       @tweet = Tweet.new(tweet_params)

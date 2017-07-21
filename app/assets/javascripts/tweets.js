@@ -11,10 +11,16 @@ document.addEventListener("DOMContentLoaded", function() {
         url: $(this).attr('action'),
         method: $(this).attr('method'),
         data: $(this).serialize(),
-        dataType: ''
+        dataType: 'json'
       }).done(function(responseData) {
-        $('.tweets').prepend(responseData);
-        console.log(responseData);
+        var tweets = document.querySelector('.tweets');
+        var tweet = document.querySelector('li');
+        tweet.className = 'tweet';
+
+        var p = document.querySelector('p');
+        p.innerHTML = responseData.message;
+        tweet.appendChild(p);
+        tweets.prepend(tweet);
       }).fail(function() {
         console.log("Error");
       }).always(function() {
